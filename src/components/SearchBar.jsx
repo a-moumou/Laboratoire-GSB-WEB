@@ -17,7 +17,11 @@ const SearchBar = () => {
       setVisible(false)
     }
 
+<<<<<<< HEAD
   }, [location])
+=======
+  }, [location, showSearch ])
+>>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
 
   return showSearch && visible ? (
     <div className='border-t border-b bg-gray-50 text-center'>

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from 'react'
+=======
+import { useContext, useEffect, useState } from 'react'
+>>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
 import Title from './Title'
 import { ShopContext } from '../context/ShopContext';
 import ProductItem from './ProductItem';

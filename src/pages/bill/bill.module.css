@@ -1,0 +1,28 @@
+.tables{
+    width: 100%;
+}
+
+.tables thead {
+    display: 17px;
+}
+
+.tables td {
+    cursor: pointer;
+    font-size: 17px;
+    padding: 1.5rem 0;
+    width: fit-content;
+    /* border-top: 0.61px solid rgb(83, 82, 82) ; */
+}
+
+
+
+.tables th, td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tables td img {
+    display: block;
+    margin: auto;
+}

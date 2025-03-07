@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import Navbar from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
@@ -15,6 +16,35 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+=======
+import  { useContext, useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { ShopContext } from './context/ShopContext';
+import { ToastContainer } from 'react-toastify';
+import Navbar from './components/ui/navbar/Navbar'
+import Home from './pages/home/Home'
+import Collection from './pages/collection/Collection'
+import Contact from './pages/contact/Contact'
+import Cart from './pages/cart/Cart'
+import Product from './pages/product/Product'
+import Footer from './components/ui/Footer/Footer'
+import Login from './pages/login/Login'
+import PlaceOrder from './pages/placeOrder/PlaceOrder'
+import Orders from './pages/orders/Orders'
+import BillPage from '/src/pages/bill/bill'
+import SearchBar from './components/SearchBar'
+import 'react-toastify/dist/ReactToastify.css';
+import Profile from './pages/profile/Profile';
+
+const App = () => {
+
+  const { loadCartItem } = useContext(ShopContext)
+  
+  useEffect(()=>{
+    loadCartItem()
+  },[loadCartItem])
+
+>>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer />
@@ -28,7 +58,13 @@ const App = () => {
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login />} />
         <Route path='/place-order' element={<PlaceOrder />} />
+<<<<<<< HEAD
         <Route path='/orders' element={<Orders />} />
+=======
+        <Route path='/bill' element={<BillPage />} />
+        <Route path='/orders/:id' element={<Orders />} />
+        <Route path='/profile' element={<Profile />} />
+>>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
       </Routes>
       <Footer />
     </div>
