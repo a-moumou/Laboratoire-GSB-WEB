@@ -1,11 +1,7 @@
 import p_img1 from './p-img1.webp'
 import p_img2_1 from './p-img2.webp'
 import p_img3 from './p-img3.webp'
-<<<<<<< HEAD
-import p_img4 from './p-img4.webp'
-=======
 import p_img4 from './p-img4.jpeg'
->>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
 import p_img5 from './p-img5.jpeg'
 import p_img6 from './p-img6.webp'
 import p_img7 from './p-img7.jpeg'
@@ -93,15 +89,10 @@ export const products = [
     },
     {
         _id: "aaaad",
-<<<<<<< HEAD
-        name: "Durex Nude XL Préservatifs",
-        description: "Les préservatifs Durex Nude XL sont ultra fins et procurent une sensation 'peau contre peau'. Ils offrent un véritable confort pour un maximum de plaisir lors de vos rapports. ",
-        price: (2.00),
-=======
+
         name: "Biogaran Multivitamines et Minéraux Comprimés Effervescents x 20",
         description: "Complément alimentaire sous forme de comprimés effervescents à base de vitamines et de minéraux. ",
         price: (7.78),
->>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
         image: [p_img4],
         category: "Men",
         subCategory: "Topwear",
