@@ -10,17 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@emailjs/browser": "^4.4.1",
-    "axios": "^1.7.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-=======
     "axios": "^1.7.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
->>>>>>> 4a45a24 (Optimization and correction of some mitakes of display)
     "react-router-dom": "^6.26.1",
     "react-toastify": "^10.0.5"
   },
