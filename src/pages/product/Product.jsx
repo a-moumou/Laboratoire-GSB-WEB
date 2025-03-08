@@ -3,19 +3,23 @@ import { useParams } from 'react-router-dom';
 import { ShopContext } from '/src/context/ShopContext';
 
 import RelatedProducts from '/src/components/RelatedProducts';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency, fetchProducts, addToCart } = useContext(ShopContext);
+  const { currency, fetchProducts, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState({});
   const [quantity, setQuantity] = useState(1); // État pour la quantité
 
   const fetchCurentProduct = async () => {
-    products.map((item)=>{
-      if (item.id == productId) {
-        setProductData(item)
-      }
-    })
+    const response = await axios.get(`${import.meta.env.VITE_NODEJS_API_BASEURL}/products/${productId}`)
+    if (response.status === 200) {
+      setProductData(response.data)
+    }
+    else{
+      toast.error("Something went wrong")
+    }
   };
 
   useEffect(() => {
@@ -34,7 +38,15 @@ const Product = () => {
             }
           </div>
           <div className='w-full sm:w-[80%]'>
-            <img className='w-full h-auto' src={productData.image[0]?.name} alt="Product image" />
+            <img 
+                className='w-full h-auto'  
+                src={
+                  productData?.image && productData.image.length > 0 && productData.image[0]?.name 
+                      ? `${import.meta.env.VITE_NODEJS_API_BASEURL}/product/image/${productData.image[0].name}` 
+                      : null
+                }  
+                alt="Product image"
+            />
           </div>
         </div>
 

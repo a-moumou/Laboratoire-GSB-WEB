@@ -9,13 +9,13 @@ const Login = () => {
     const currentState = 'Login'
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const { setClientId } = useContext(ShopContext)
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(import.meta.env.VITE_NODEJS_API_BASEURL + '/api/clients/login',
+            const response = await axios.post(import.meta.env.VITE_NODEJS_API_BASEURL + '/clients/login',
             {
                 email,
                 password
@@ -25,18 +25,16 @@ const Login = () => {
 
             if (response.status === 200 && response.data.client_id) {
                 setClientId(response.data.client_id)
+                localStorage.setItem("client_id", response.data.client_id)
                 toast.success('Connexion réussie !', {
                     position: "top-right",
                     autoClose: 2000
                 })
 
-                console.log(response.data)
-                const token = response.headers['authorization']?.replace('Bearer ', '')
-                localStorage.setItem('token', token)
-
                 setTimeout(() => {
                     navigate('/')
                 }, 1500)
+
             }
         } catch (error) {
             console.log(error)

@@ -12,7 +12,15 @@ const ProductItem = ({ id, name, image, price }) => {
     <Link to={`/product/${id}`} onClick={() => window.scrollTo(0, 0)} className='text-gray-700 cursor-pointer'>
 
       <div className=' overflow-hidden'>
-        <img className='hover:scale-110 transition ease-in-out' src={image[0]?.name ?? ""} alt="Product Image" />
+        <img
+            className='hover:scale-110 transition ease-in-out'
+            alt="Product Image"
+            src={
+              image && image.length > 0 && image[0]?.name 
+              ? `${import.meta.env.VITE_NODEJS_API_BASEURL}/product/image/${image[0].name}` 
+              : null
+            }
+        />
       </div>
 
       <p className='pt-3 pb-1 text-sm'>{name}</p>

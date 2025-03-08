@@ -9,7 +9,7 @@ import styles from "./bill.module.css"
 
 const BillPage = () => {
     const navigate = useNavigate()
-    const { delivery_fee } = useContext(ShopContext)
+    const {  clientId,  delivery_fee } = useContext(ShopContext)
     const [ userCommand, setUserCommand  ] = useState(null)
 
     const getCommandUserFromBDD = async () => {
@@ -20,8 +20,7 @@ const BillPage = () => {
     }
 
     useEffect(()=>{
-        const token = JSON.parse(localStorage.getItem("token"))
-        if(!token){
+        if(!clientId){
             navigate("/")
         }else{
             getCommandUserFromBDD()
@@ -35,14 +34,18 @@ const BillPage = () => {
                         <Title text1={'MY'} text2={'ORDERS'} />
                     </div>
                     <table className={styles.tables}>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>total</th>
-                                <th>Delivered</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
+                        {
+                            userCommand && userCommand.length > 0 && 
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>total</th>
+                                    <th>Delivered</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            
+                        }
                         <tbody>
                             {
                                 userCommand && userCommand.length > 0 && userCommand.map((item, index)=> {

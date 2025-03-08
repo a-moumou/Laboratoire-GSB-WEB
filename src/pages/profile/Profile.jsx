@@ -12,7 +12,7 @@ const Profile = () => {
     const fetchClientData = useCallback(async () => {
         try {
             const response = await axios.get(
-                `${import.meta.env.VITE_NODEJS_API_BASEURL}/api/clients/${clientId}`
+                `${import.meta.env.VITE_NODEJS_API_BASEURL}/clients/${clientId}`
             );
             setClientData(response.data);
         } catch (error) {

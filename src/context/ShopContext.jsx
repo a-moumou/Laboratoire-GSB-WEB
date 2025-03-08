@@ -14,19 +14,24 @@ const ShopContextProvider = (props) => {
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItem, setCartItem] = useState([]);
-    const [clientId, setClientId] = useState(null);
+    const [clientId, setClientId] = useState(()=>{
+        const saved = JSON.parse(localStorage.getItem("client_id"));
+        return saved ? saved : null
+    });
     const [products, setProducts] = useState([]);
 
-    //Execute callbacks when the application start
+    /* First step in runing */
+
     useEffect(()=>{
         fetchProducts();
         loadCartItem();
     },[])
 
+    /* Get all the products stored in rge database*/
 
     const fetchProducts = async () => {
         try {
-            const url = import.meta.env.VITE_NODEJS_API_BASEURL + "/api/products"
+            const url = import.meta.env.VITE_NODEJS_API_BASEURL + "/products"
             const response = await axios.get(url);
             setProducts(response.data);
         } catch (error) {
@@ -42,13 +47,14 @@ const ShopContextProvider = (props) => {
     }, [])
 
 
+    /* Add product to cart */
+
     const addToCart = async (itemId, size) => {
 
         if (!size) {
             toast.error('Select product size');
             return;
         }
-
 
         const cartItemsLocalStorage = JSON.parse(localStorage.getItem("cartItems"))
             if (cartItemsLocalStorage) {
@@ -63,12 +69,14 @@ const ShopContextProvider = (props) => {
                     cartItemsLocalStorage.push(item);
                 } 
                 setCartItem(cartItemsLocalStorage)
-                localStorage.setItem("cartItems",JSON.stringify(cartItemsLocalStorage)) //stock the data into the local storage
+                localStorage.setItem("cartItems",JSON.stringify(cartItemsLocalStorage))
             }
             else{
                 localStorage.setItem("cartItems",JSON.stringify([ {id: itemId, size: size} ]))
             }
     }
+
+    /* Increase or decrease the quantity of product in the cart */
 
     const updateQuantity = async (itemId, size, quantity) => {
         const cartItemsLocalStorage = JSON.parse(localStorage.getItem("cartItems"))
@@ -76,6 +84,8 @@ const ShopContextProvider = (props) => {
         selectedCart[size] = quantity;
         localStorage.setItem("cartItems",JSON.stringify(cartItemsLocalStorage))
     }
+
+    /* Delete one product of your cart */
 
     const deleteCartItem = (item) => {
             const cartItemsLocalStorage = JSON.parse(localStorage.getItem( "cartItems" )) || []
@@ -85,6 +95,7 @@ const ShopContextProvider = (props) => {
             setCartItem(cartItemsLocalStorage)
     }
 
+    /* Get the tatal price of the product within your cart */
 
     const getCartAmount = () => {
         let totalAmount = 0;

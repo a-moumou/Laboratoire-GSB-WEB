@@ -1,26 +1,30 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { ShopContext } from '/src/context/ShopContext'
 import Title from '/src/components/Title';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Orders = () => {
 
     const { id } = useParams() //an id of a command
-    const { currency } = useContext(ShopContext);
+    const { currency, clientId } = useContext(ShopContext);
+    const navigate = useNavigate()
     const [productFromOrder, setProductFromOrder ] = useState([])
 
-    const handleProductFromCommand = async () => {
+    const handleProductFromCommand = useCallback( async () => {
         const response = await axios.get(
             `${import.meta.env.VITE_NODEJS_API_BASEURL}/api/commands/products/${id}`
         )
         console.log(response.data)
         setProductFromOrder(response.data)
-    }
+    }, [id])
 
     useEffect(()=>{
+        if (!clientId) {
+            navigate("/login")
+        }
         handleProductFromCommand()
-    },[])
+    },[clientId, navigate, handleProductFromCommand])
 
 
     return (

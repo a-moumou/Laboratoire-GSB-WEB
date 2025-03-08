@@ -1,16 +1,23 @@
-import { useContext, useEffect, useState } from 'react'
-import Title from './Title'
-import { ShopContext } from '../context/ShopContext';
+import axios from "axios"
 import ProductItem from './ProductItem';
+import Title from './Title'
+import { useEffect, useState } from "react";
 
 const BestSeller = () => {
 
     const [bestSeller, setBestSeller] = useState([])
 
-    const { products  } = useContext(ShopContext)
-    useEffect(() => {
-        setBestSeller(products.slice(0, 5))
-    }, [products])
+    const getBestsellerProduct = async () => {
+        const response = await axios.get(`${import.meta.env.VITE_NODEJS_API_BASEURL }/products/bestseller/retrieve`)
+        if (response.status === 200) {
+            setBestSeller(response.data)
+            console.log(response.data)
+        }
+    }
+
+    useEffect(()=>{
+        getBestsellerProduct()
+    },[])
 
     return (
         <div className='my-10'>
